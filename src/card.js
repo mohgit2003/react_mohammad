@@ -1,6 +1,8 @@
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import main from './Main.json';
+import Accordion from 'react-bootstrap/Accordion';
+
 
 function Card1() {
   return (
@@ -13,7 +15,14 @@ function Card1() {
         <Card.Body>
         <Card.Title>{Item.title}</Card.Title>
         <Card.Text>
+        <Accordion>
+        <Accordion.Item>
+          <Accordion.Header>MoreDetales</Accordion.Header>
+          <Accordion.Body>
           {Item.description}
+          </Accordion.Body>
+        </Accordion.Item>
+        </Accordion>
         </Card.Text>
         <Button variant="primary">Bay</Button>
         </Card.Body>
