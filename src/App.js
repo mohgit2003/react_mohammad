@@ -1,13 +1,20 @@
-import logo from './logo.svg';
+import Arr from './arr';
 import './App.css';
-import Pr from './header.js';
-import Card1 from './card.js';
+import He from './header.js';
+import { BrowserRouter as Router,Routes,Route} from 'react-router-dom';
+import Menu from './theMenu';
+import Card1 from './card';
 
 function App() {
   return (
     <>
-    <Pr />
-    <Card1 />
+    <He />
+    <Router>
+    <Routes>
+      <Route path='/' Component={Arr}></Route>
+      <Route path='/theMenu' Component={Menu}></Route>
+    </Routes>
+    </Router>
     </>
   );
 }

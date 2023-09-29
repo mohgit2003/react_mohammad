@@ -1,0 +1,14 @@
+#map {
+    display:flex;
+    margin-Top:3%;
+    justify-Content:space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+#Search{
+    margin-top: 3%;
+    margin-left: 20%;
+    margin-right: 20%;
+}

@@ -1,36 +1,43 @@
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import Card from 'react-bootstrap/Card';
-import main from './Main.json';
-import Accordion from 'react-bootstrap/Accordion';
 
 
-function Card1() {
+
+function Card1(data) {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <>
-    <div style={{display:"flex",marginTop:"3%",justifyContent:"space-between"}}>
-    {main.map(function(Item){
-        return(
+    <div style={{display:"flex",marginTop:"3%",justifyContent:"space-between", flexWrap:"warp"}}>
         <Card style={{ width: '18rem' }}>
-        <Card.Img variant="top" src={Item.image_url}/>
+        <Card.Img variant="top" src={data.image}/>
         <Card.Body>
-        <Card.Title>{Item.title}</Card.Title>
+        <Card.Title>{data.title}</Card.Title>
         <Card.Text>
-        <Accordion>
-        <Accordion.Item>
-          <Accordion.Header>MoreDetales</Accordion.Header>
-          <Accordion.Body>
-          {Item.description}
-          </Accordion.Body>
-        </Accordion.Item>
-        </Accordion>
+        <Button variant="primary" onClick={handleShow}>
+        More Detales
+      </Button>
+      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+        <Modal.Header closeButton>
+          <Modal.Title>{data.title}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          {data.descripion}
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+        </Modal>
         </Card.Text>
         <Button variant="primary">Bay</Button>
         </Card.Body>
         </Card>
-    )
-    }
-    )
-    }
     </div>
     </>
   )
