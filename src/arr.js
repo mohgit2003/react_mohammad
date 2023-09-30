@@ -2,8 +2,7 @@ import Main from './Main.json'
 import Card1 from './card'
 import { useState } from 'react';
 import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import './arr.css';
+import './Stayle.css';
 
 
 

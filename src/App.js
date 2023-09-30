@@ -12,7 +12,7 @@ function App() {
     <Router>
     <Routes>
       <Route path='/' Component={Arr}></Route>
-      <Route path='/theMenu' Component={Menu}></Route>
+      <Route path='/TheMenu' Component={Menu}></Route>
     </Routes>
     </Router>
     </>
