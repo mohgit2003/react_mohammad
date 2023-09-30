@@ -9,15 +9,16 @@ import './arr.css';
 
 function Arr(){
     let [item,setItem]=useState(Main);
-    function Submit (search){
-        search.preventDefault()
-        let sh=search.target.h.value;
-        let filt=Main.filter(function(Item){return Item.title.toLowerCase().includes(sh.toLowerCase())})
-        setItem(filt);
+    const Submit=(event)=>{
+        const sh=event.target.value
+        const newFilter=Main.filter((value)=>{
+            return value.title.toLowerCase().includes(sh.toLowerCase())
+        })
+        setItem(newFilter);
     }
     return(
         <>
-        <Form className="d-flex" onSubmit={Submit} id="Search">
+        <Form className="d-flex" onChange={Submit} id="Search">
             <Form.Control
               type="search"
               placeholder="Search"
@@ -25,7 +26,6 @@ function Arr(){
               aria-label="Search"
               name="h"
             />
-            <Button variant="outline-success" type='Submit'>Search</Button>
         </Form>
         <div id="map">
             {item.map(function(Item){

@@ -3,7 +3,7 @@ import './App.css';
 import He from './header.js';
 import { BrowserRouter as Router,Routes,Route} from 'react-router-dom';
 import Menu from './theMenu';
-import Card1 from './card';
+
 
 function App() {
   return (
