@@ -8,6 +8,10 @@ import Card from 'react-bootstrap/Card';
 function Card1(data) {
   const [show, setShow] = useState(false);
 
+  async function api(){
+    const url ='www.themealdb.com/api/json/v1/1/search.php?f='
+  }
+
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   return (
@@ -19,11 +23,11 @@ function Card1(data) {
         <Card.Title>{data.title}</Card.Title>
         <Card.Text>
         <Button variant="primary" onClick={handleShow}>
-        More Detales
+        The Recipes
       </Button>
       <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
         <Modal.Header closeButton>
-          <Modal.Title>{data.title}</Modal.Title>
+          <Modal.Title>{data.title} <a> (Category ({data.Category}))</a></Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {data.descripion}
@@ -35,7 +39,6 @@ function Card1(data) {
         </Modal.Footer>
         </Modal>
         </Card.Text>
-        <Button variant="primary">Bay</Button>
         </Card.Body>
         </Card>
     </div>
