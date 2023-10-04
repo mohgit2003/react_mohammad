@@ -11,22 +11,19 @@ import { useEffect } from 'react';
 function Arr(){
     let [item,setItem]=useState([]);
     async function Meal(){
-        let api=await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
+        let api=await fetch('https://www.themealdb.com/api/json/v1/1/search.php?f=c')
+        let data=await api.json();
+        setItem(data.meals)
+    }     
+    async function Handelsubmit(event){
+        event.preventDefault();
+        let sh=event.target.h.value;
+        let api=await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s='+sh)
         let data=await api.json();
         setItem(data.meals)
     }
-    useEffect( function(){Meal()},[])
-   
-        
-    async function Handelsubmit(event){
-        event.preventDefault()
-        let sh=event.target.h.value;
-        let api=await fetch('https://www.themealdb.com/api/json/v1/1/search.php?s=')
-        let data=await api.json();
-        let filterSh=data.meals.filter(function(Item){return Item.strMeal.toLowerCase().includes(sh.toLowerCase())})
-        setItem(filterSh);
-    }
-    
+     useEffect( function(){Meal() 
+        },[])
     return(
         <>
         <Form className="d-flex" onSubmit={Handelsubmit} id="Search">
@@ -39,10 +36,11 @@ function Arr(){
             />
             <Button variant="outline-success" type='Submit'>Search</Button>
         </Form>
-        <div id="map">
-            {item[0]!=null?item.map(function(Item){
+        <div className='map'>
+            {item && item.length !=0 ?item.map(function(Item){
                 return(
-                  <><Card1 image={Item.strMealThumb} title={Item.strMeal} descripion={Item.strInstructions} Category={Item.strCategory} />
+                  <>
+                  <Card1 image={Item.strMealThumb} title={Item.strMeal} descripion={Item.strInstructions} Category={Item.strCategory} showFavorites={true} />
                   </>
                 )
             }

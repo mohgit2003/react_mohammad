@@ -3,7 +3,8 @@ import './App.css';
 import He from './header.js';
 import { BrowserRouter as Router,Routes,Route} from 'react-router-dom';
 import Menu from './theMenu';
-import Card1 from './card';
+import Favorit from './localstor';
+
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
     <Routes>
       <Route path='/' Component={Arr}></Route>
       <Route path='/TheMenu' Component={Menu}></Route>
+      <Route path='/favorit' Component={Favorit}></Route>
     </Routes>
     </Router>
     </>

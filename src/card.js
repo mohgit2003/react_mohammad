@@ -8,12 +8,33 @@ import Card from 'react-bootstrap/Card';
 function Card1(data) {
   const [show, setShow] = useState(false);
 
-  async function api(){
-    const url ='www.themealdb.com/api/json/v1/1/search.php?f='
-  }
+  
 
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  function handleShow(){
+    setShow(!show)
+  }
+  function LocalStorage (){
+
+    if(localStorage.getItem("favorites")){
+
+    let stringData = localStorage.getItem("favorites")
+    let array = JSON.parse(stringData);
+    array.push(data) 
+    
+    let stringedData = JSON.stringify(array)
+
+    localStorage.setItem("favorites", stringedData)
+  }
+    else {
+
+      let array = [];
+      array.push(data)
+      let stringedData = JSON.stringify(array)
+  
+      localStorage.setItem("favorites", stringedData)
+
+    }
+  }
   return (
     <>
     <div style={{display:"flex",marginTop:"3%",justifyContent:"space-between", flexWrap:"warp"}}>
@@ -25,7 +46,12 @@ function Card1(data) {
         <Button variant="primary" onClick={handleShow}>
         The Recipes
       </Button>
-      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false}>
+      {data.showFavorites? <Button onClick={LocalStorage}>Add to Favorites</Button>
+          : <Button onClick={LocalStorage} style={{display:"none"}}>Add to Favorites</Button>
+          
+          }
+          <Button onClick={data.handleDelete} >Delete</Button>
+      <Modal show={show} onHide={handleShow} backdrop="static" keyboard={false}>
         <Modal.Header closeButton>
           <Modal.Title>{data.title} <a> (Category ({data.Category}))</a></Modal.Title>
         </Modal.Header>
@@ -33,7 +59,7 @@ function Card1(data) {
           {data.descripion}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+          <Button variant="secondary" onClick={handleShow}>
             Close
           </Button>
         </Modal.Footer>

@@ -3,8 +3,12 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import LoginButton from './login';
+import { useAuth0 } from '@auth0/auth0-react';
+import LogoutButton from './logout';
 
 function He() {
+  let {isAuthenticated}=useAuth0()
   return (
     <div>
     <Navbar expand="lg" className="bg-body-tertiary">
@@ -19,6 +23,7 @@ function He() {
           >
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/theMenu">browse</Nav.Link>
+            <Nav.Link href="/favorit">Favorites</Nav.Link>
             <NavDropdown title="Link" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action4">
@@ -35,6 +40,7 @@ function He() {
           </Nav>
           
         </Navbar.Collapse>
+        {isAuthenticated ? <LogoutButton/>:<LoginButton/> }
       </Container>
     </Navbar>
     </div>
