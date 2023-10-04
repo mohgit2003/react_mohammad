@@ -1,12 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Card1 from "./card";
 
 
 function Favorit (){
-
+    let [isAuthenticated,user]=useState()
     let Favorites = localStorage.getItem("favorites");
     let favorites = JSON.parse(Favorites);
-    let [favoritesState, setFavoritesState] = useState(favorites)
+    let [favoritesState, setFavoritesState] = useState([])
 
     function handleDelete (index) {
 
@@ -16,16 +16,22 @@ function Favorit (){
         let Data = JSON.stringify(favoritesCopy)
         localStorage.setItem("favorites", Data)
       }
-
-
+    function favoritData(){
+        if(isAuthenticated){
+         let filterfavorit=favorites.fiter(function(item){return user.email === item.email})
+         setFavoritesState(filterfavorit)
+        }
+       
+    }
+    useEffect(function(){favoritData()},[])
     return(
         <>
         <div className="map">
-    {favoritesState.length !==0 ? favoritesState.map(function(item, index){
+    {isAuthenticated && favoritesState.length !==0 ? favoritesState.map(function(item, index){
             return(
               <>
                 <Card1 image={item.image} title={item.title} showFavorites={false}  index = {index} 
-                handleDelete={()=>{handleDelete(index)}}/>
+                handleDelete={()=>{handleDelete(index)}} key={index} email={user.email} showDelete={true}/>
                 </>
             )
         }

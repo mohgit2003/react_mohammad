@@ -8,9 +8,10 @@ import { useAuth0 } from '@auth0/auth0-react';
 import LogoutButton from './logout';
 
 function He() {
-  let {isAuthenticated}=useAuth0()
+  let {isAuthenticated,user}=useAuth0()
+  console.log(user)
   return (
-    <div>
+    
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container fluid>
         <Navbar.Brand href="#">Food Recipes</Navbar.Brand>
@@ -23,7 +24,7 @@ function He() {
           >
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/theMenu">browse</Nav.Link>
-            <Nav.Link href="/favorit">Favorites</Nav.Link>
+            {isAuthenticated && <Nav.Link href="/favorit">Favorites</Nav.Link>}
             <NavDropdown title="Link" id="navbarScrollingDropdown">
               <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
               <NavDropdown.Item href="#action4">
@@ -40,10 +41,16 @@ function He() {
           </Nav>
           
         </Navbar.Collapse>
-        {isAuthenticated ? <LogoutButton/>:<LoginButton/> }
+        {isAuthenticated?
+        <>
+         <LogoutButton/>
+         <img src={user.picture} style={{width:"50px", height:"50px", margin:"0 10px 0 10px"}}></img>
+         <h3>{user.name}</h3>
+         </>:
+         <LoginButton/> }
       </Container>
     </Navbar>
-    </div>
+   
   );
 }
 

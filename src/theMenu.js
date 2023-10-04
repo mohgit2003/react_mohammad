@@ -1,6 +1,7 @@
 import Form from 'react-bootstrap/Form';
 import { useEffect, useState } from 'react';
 import Card1 from './card';
+
 function Menu(){
     let [item,setItem]=useState([]);
     let [category,setcategory]=useState([]);
@@ -18,8 +19,7 @@ function Menu(){
         let changeitem=event.target.value
         let api=await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c='+changeitem)
         let data=await api.json();
-       
-        setItem(data.meals);
+       setItem(data.meals)
     }
     useEffect(()=>{Meal() 
         catr()},[])
@@ -36,7 +36,7 @@ return(
             {item && item.length !=0?item.map(function(Item){
                 return(
                   <>
-                  <Card1 image={Item.strMealThumb} title={Item.strMeal} descripion={Item.strInstructions} Category={Item.strCategory} showFavorites={true}/>
+                  <Card1 image={Item.strMealThumb} title={Item.strMeal} descripion={Item.strInstructions} Category={Item.strCategory} showFavorites={true} showDelete={false}/>
                   </>
                 )
             }
